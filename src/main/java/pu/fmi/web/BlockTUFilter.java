@@ -12,14 +12,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter("/*")
+@WebFilter("/*") // ???? probably maps every request
 public class BlockTUFilter implements Filter {
-
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -34,10 +28,9 @@ public class BlockTUFilter implements Filter {
 
 	}
 
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
+  @Override
+  public void init(FilterConfig filterConfig) throws ServletException {}
 
-	}
-
+  @Override
+  public void destroy() {}
 }

@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebFilter;
 @WebFilter("/*")
 public class ReqCountingFilter implements Filter {
 
-	public static final String COUNTER_ATTR = "counter";
+  public static final String COUNTER_ATTR = "counter";
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -24,9 +24,9 @@ public class ReqCountingFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		Long allCount = (Long) request.getServletContext().getAttribute(COUNTER_ATTR);
-		allCount++;
-		request.getServletContext().setAttribute(COUNTER_ATTR, allCount);
+    long allCount = (long) request.getServletContext().getAttribute(COUNTER_ATTR);
+
+    request.getServletContext().setAttribute(COUNTER_ATTR, Long.valueOf(allCount++));
 
 		chain.doFilter(request, response);
 	}

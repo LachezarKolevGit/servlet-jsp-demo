@@ -3,4 +3,31 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+  <servlet>
+    <display-name>SayHelloServletPU</display-name>
+    <servlet-name>SayHelloServletPU</servlet-name>
+    <servlet-class>pu.fmi.web.SayHelloServlet</servlet-class>
+    <init-param>
+          	<param-name>greeting</param-name>
+            <param-value>Hello</param-value>
+    </init-param>
+  </servlet>   
+  <servlet-mapping>
+    <servlet-name>SayHelloServletPU</servlet-name>
+    <url-pattern>/say-hello-my-way</url-pattern>
+  </servlet-mapping>   
+  
+    <servlet>
+    <display-name>SayHelloThroughJspServletBG</display-name>
+    <servlet-name>SayHelloThroughJspServletBG</servlet-name>
+    <servlet-class>bg.proxiad.demo.SayHelloThroughJspServlet</servlet-class>
+    <init-param>
+          	<param-name>greeting</param-name>
+            <param-value>Hi</param-value>
+    </init-param>
+  </servlet>   
+  <servlet-mapping>
+    <servlet-name>SayHelloThroughJspServletBG</servlet-name>
+    <url-pattern>/say-hello-through-jsp</url-pattern>
+  </servlet-mapping> 
 </web-app>
