@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/count-all-request")
 public class CountAllRequestsServlet extends HttpServlet {
-  private static final long serialVersionUID = 35L;
 
   public static final String TOTAL_CLICKS_ATTR = "totalClicks";
 
@@ -22,21 +21,22 @@ public class CountAllRequestsServlet extends HttpServlet {
     super.init();
   }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	 HttpSession session = request.getSession();
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    HttpSession session = request.getSession();
     ServletContext servletContext = session.getServletContext();
-    
     int totalClicks = 0;
+
     if (servletContext.getAttribute(TOTAL_CLICKS_ATTR) != null) {
       totalClicks = (int) servletContext.getAttribute(TOTAL_CLICKS_ATTR);
     } else {
       servletContext.setAttribute(TOTAL_CLICKS_ATTR, Integer.valueOf(totalClicks));
     }
+
     response.setContentType("text/html");
     response.setCharacterEncoding("UTF-8");
     response
         .getWriter()
         .append(format("<html><body><p>Total counter: %d</p></body></html>", totalClicks));
-	}
-
+  }
 }

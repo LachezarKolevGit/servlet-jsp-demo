@@ -12,21 +12,21 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter("/*") // ???? probably maps every request
+@WebFilter("/*")
 public class BlockTUFilter implements Filter {
 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
-		String name = req.getParameter("name");
-		if ("TU".equalsIgnoreCase(name)) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED);
-		} else {
-			chain.doFilter(request, response);
-		}
+  @Override
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+      throws IOException, ServletException {
+    HttpServletRequest req = (HttpServletRequest) request;
+    String name = req.getParameter("name");
 
-	}
+    if ("TU".equalsIgnoreCase(name)) {
+      ((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED);
+    } else {
+      chain.doFilter(request, response);
+    }
+  }
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {}

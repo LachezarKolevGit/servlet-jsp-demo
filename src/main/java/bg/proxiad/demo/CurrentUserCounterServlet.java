@@ -13,11 +13,11 @@ import pu.fmi.web.ConfigureGreetingListener;
 
 @WebServlet("/current-user-counter")
 public class CurrentUserCounterServlet extends HttpServlet {
-	private static final long serialVersionUID = 25L;
+  private static final long serialVersionUID = 25L;
 
   public static final String SESSION_ATTRIBUTE_COUNTER = "counterForSession";
 
-  public static final Integer COUNTER_INIT_VALUE_INTEGER = 0;
+  public static final Integer COUNTER_INIT_VALUE = 0;
 
   @Override
   public void init() throws ServletException {
@@ -27,18 +27,20 @@ public class CurrentUserCounterServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     HttpSession session = request.getSession();
+
     if (session.getAttribute(SESSION_ATTRIBUTE_COUNTER) == null) { // new session
-      session.setAttribute(SESSION_ATTRIBUTE_COUNTER, COUNTER_INIT_VALUE_INTEGER);
+      session.setAttribute(SESSION_ATTRIBUTE_COUNTER, COUNTER_INIT_VALUE);
     }
 
     int counter = (int) session.getAttribute(ConfigureGreetingListener.SESSION_COUNTER_ATTR);
-    counter++;
-    session.setAttribute(ConfigureGreetingListener.SESSION_COUNTER_ATTR, Integer.valueOf(counter));
-
-      ServletContext servletContext = session.getServletContext();
+    ServletContext servletContext = session.getServletContext();
     int totalClicks =
         (int) servletContext.getAttribute(ConfigureGreetingListener.TOTAL_CLICKS_ATTR);
+
+    counter++;
     totalClicks++;
+
+    session.setAttribute(ConfigureGreetingListener.SESSION_COUNTER_ATTR, Integer.valueOf(counter));
     servletContext.setAttribute(
         CountAllRequestsServlet.TOTAL_CLICKS_ATTR, Integer.valueOf(totalClicks));
 

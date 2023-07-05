@@ -13,20 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/greeting")
 public class GreetingServlet extends HttpServlet {
 
-  private static final long serialVersionUID = 22L;
-
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-		String name = req.getParameter("name");
-		String greeting = "Здравей";
+    String name = req.getParameter("name");
+    String greeting = "Здравей";
+    Long allCount = (Long) getServletContext().getAttribute(ReqCountingFilter.COUNTER_ATTR);
 
-		Long allCount = (Long) getServletContext().getAttribute(ReqCountingFilter.COUNTER_ATTR);
-
-		resp.setContentType("text/html");
-		resp.setCharacterEncoding("UTF-8");
-		resp.getWriter().append(
-				format("<html><body><h1>%s, %s</h1><p>Counter: %s</p></body></html>", greeting, name, allCount));
-	}
-
+    resp.setContentType("text/html");
+    resp.setCharacterEncoding("UTF-8");
+    resp.getWriter()
+        .append(
+            format(
+                "<html><body><h1>%s, %s</h1><p>Counter: %s</p></body></html>",
+                greeting, name, allCount));
+  }
 }

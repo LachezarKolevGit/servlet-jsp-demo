@@ -15,25 +15,22 @@ public class ReqCountingFilter implements Filter {
 
   public static final String COUNTER_ATTR = "counter";
 
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		filterConfig.getServletContext().setAttribute(COUNTER_ATTR, Long.valueOf(0L));
-	}
+  @Override
+  public void init(FilterConfig filterConfig) throws ServletException {
+    filterConfig.getServletContext().setAttribute(COUNTER_ATTR, Long.valueOf(0L));
+  }
 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-
+  @Override
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+      throws IOException, ServletException {
     long allCount = (long) request.getServletContext().getAttribute(COUNTER_ATTR);
+    allCount++;
+    request.getServletContext().setAttribute(COUNTER_ATTR, Long.valueOf(allCount));
+    chain.doFilter(request, response);
+  }
 
-    request.getServletContext().setAttribute(COUNTER_ATTR, Long.valueOf(allCount++));
-
-		chain.doFilter(request, response);
-	}
-
-	@Override
-	public void destroy() {
-		System.out.println("MyFirstFilter, destroing");
-	}
-
+  @Override
+  public void destroy() {
+    System.out.println("MyFirstFilter, destroing");
+  }
 }
